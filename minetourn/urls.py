@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^$', views.players, name='index'),
     url(r'^players/$', views.players, name='players'),
     url(r'^stats/$', views.stats, name='stats'),
+    url(r'^items/$', views.item_values, name='item-values'),
 ]

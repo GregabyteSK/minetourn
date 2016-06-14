@@ -23,7 +23,47 @@
     </thead>
     <tbody>
     {% for player in players %}
-        <tr><td>{{ player.name }}</td><td>{{ player.points }}</td><td>{{ player.snapshot.created_at }}</td></tr>
+        <tr>
+            <td>{{ player.name }}</td>
+            <td>{{ player.points }}</td>
+            <td>{{ player.snapshot.created_at }}</td>
+            {% if SHOW_INV %}
+            <td>
+                <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#{{ player }}_modal">
+                    Inventory
+                </button>
+
+                <div class="modal fade" id="{{ player }}_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">{{ player }}'s Inventory</h4>
+                      </div>
+                      <div class="modal-body">
+                        {% for item in player.snapshot.inventoryitem_set.all %}
+                          <table class="inventory display" cellspacing="0" width="100%">
+                              <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Count</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr><td>{{ item.item.name}} </td><td>{{ item.count}} </td></tr>
+                              </tbody>
+                          </table>
+
+                          {% endfor %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </td>
+            {% endif %}
+        </tr>
     {% endfor %}
     </tbody>
     <tfoot>
@@ -34,6 +74,7 @@
         </tr>
     </tfoot>
 </table>
+
 </div>
 {% endblock content %}
 

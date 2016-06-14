@@ -27,5 +27,10 @@ def stats(request):
     return render(request, template_name='templates/stats.html', context=locals())
 
 def players(request, id=None):
+    SHOW_INV = getattr(settings, 'SHOW_INV', None)
     players = models.Player.objects.all()
     return render(request, template_name='templates/players.html', context=locals())
+
+def item_values(request):
+    items = models.Item.objects.all()
+    return render(request, template_name='templates/item_values.html', context=locals())
