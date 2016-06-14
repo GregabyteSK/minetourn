@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+<title>Player Statistics</title>
+{% endblock title %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css">
+{% endblock extra_head%}
+
+{% block content %}
+<div id="chart">
+</div>
+<div class="alert alert-info"><strong>Hover over a name to highlight or click a name to add/remove it</strong></div>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+<script>
+var chart = c3.generate({
+    data: {
+        xFormat: '%Y/%m/%d %H:%M',
+        json: {{ data|safe }},
+        keys: {
+            x: 'time',
+            value: {{ players|safe }}
+        }
+    },
+    axis: {
+        x: {
+            type: 'timeseries',
+            tick: {
+                fit: false,
+                format: '%H:%M'
+            }
+        },
+        min: {
+            y: 0,
+        },
+    },
+    line: {
+       connect: {
+            null: true
+        }
+    }
+});
+</script>
+{% endblock extra_js%}

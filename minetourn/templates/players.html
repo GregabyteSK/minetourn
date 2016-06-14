@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+<title>Players</title>
+{% endblock title %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" crossorigin="anonymous">
+{% endblock extra_head%}
+
+{% block content %}
+<div>
+    <div class="alert alert-info"><strong>{% now 'DATETIME_FORMAT' %}</strong></div>
+    <br>
+<table id="stats" class="display" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Points</th>
+            <th>Updated</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for player in players %}
+        <tr><td>{{ player.name }}</td><td>{{ player.points }}</td><td>{{ player.snapshot.created_at }}</td></tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Points</th>
+            <th>Updated</th>
+        </tr>
+    </tfoot>
+</table>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#stats').DataTable();
+} );
+</script>
+{% endblock extra_js%}

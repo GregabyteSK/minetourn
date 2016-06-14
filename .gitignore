@@ -1,0 +1,5 @@
+*.pyc
+*.idea
+.minetourn
+*.sqlite3
+test_data
