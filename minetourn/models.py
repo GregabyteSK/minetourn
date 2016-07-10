@@ -56,8 +56,8 @@ class Player(models.Model):
             try:
                 item = Item.objects.get(name=inv_item.get('id'))
                 if item:
-                    InventoryItem.objects.create(name=inv_item.get('id'), count=inv_item.get('count'), snapshot=snapshot)
-            except:
+                    InventoryItem.objects.create(item=item, count=inv_item.get('Count').value, snapshot=snapshot)
+            except Item.DoesNotExist:
                 pass
 
     @property

@@ -107,4 +107,4 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-PLAYER_DIR = 'test_data/'
+PLAYER_DIR = '/home/greg/minecraft/world/playerdata/'
